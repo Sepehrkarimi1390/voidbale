@@ -1,6 +1,6 @@
 [project]
 name = "voidbale"
-version = "1.0.0"
+version = "1.0.7"
 description = "Async, token-only Python framework for building Bale Messenger bots."
 readme = "README.md"
 requires-python = ">=3.9"

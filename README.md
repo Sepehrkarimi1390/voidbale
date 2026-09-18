@@ -1,8 +1,6 @@
 <div align="center">
 
-<img src="./logo.png" width="180" alt="VoidBale Logo">
-
-# VoidBale
+<img src="https://drive.google.com/uc?export=view&id=1rzTZVGNXCo5buCXsHXIe_roK_ghrqWq-" width="180" alt="VoidBale Logo">
 
 ### Async • Token-Only • Bale Bot Framework
 
@@ -89,56 +87,3 @@ Install VoidBale directly from PyPI:
 
 ```bash
 pip install voidbale
-```
-
----
-
-## 🐍 Quick Start
-
-```python
-from voidbale import Bot
-
-bot = Bot("YOUR_BALE_BOT_TOKEN")
-
-@bot.command("start")
-async def start(message):
-    await message.answer("Hello from VoidBale")
-
-bot.run()
-```
-
----
-
-## 📚 Resources
-
-### PyPI
-
-https://pypi.org/project/voidbale/
-
-### Documentation
-
-https://weblics.ir/voidbale
-
-### GitHub
-
-https://github.com/Sepehrkarimi1390/voidbale
-
----
-
-<div align="center">
-
-## VoidBale
-
-**Build Bale Bots with Python.**
-
-Async by design
-Token-only by architecture
-Built for Bale Bot API
-
-<br>
-
-<a href="https://pypi.org/project/voidbale/">PyPI</a>
-  •   <a href="https://weblics.ir/voidbale">Documentation</a>
-  •   <a href="https://github.com/Sepehrkarimi1390/voidbale">GitHub</a>
-
-</div>

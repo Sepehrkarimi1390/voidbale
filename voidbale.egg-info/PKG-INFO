@@ -1,112 +1,101 @@
 Metadata-Version: 2.4
 Name: voidbale
-Version: 1.0.0
+Version: 1.0.7
 Summary: Async, token-only Python framework for building Bale Messenger bots.
-Author-email: Amin Madani <aminmadani112@gmail.com>
-License: MIT License
-        
-        Copyright (c) 2026 Amin Madani
-        
-        Permission is hereby granted, free of charge, to any person obtaining a copy
-        of this software and associated documentation files, to deal in the Software
-        without restriction, including without limitation the rights to use, copy,
-        modify, merge, publish, distribute, sublicense, and sell copies of the Software,
-        and to permit persons to whom the Software is furnished to do so, subject to the
-        following conditions:
-        
-        The above copyright notice and this permission notice shall be included in all
-        copies or substantial portions of the Software.
-        
-        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-        SOFTWARE.
-        
 Project-URL: Homepage, https://pypi.org/project/voidbale/
 Project-URL: Documentation, https://weblics.ir/voidbale
+Project-URL: Github, https://github.com/Sepehrkarimi1390/voidbale
 Keywords: bale,bale-messenger,bot,bot-api,webhook,asyncio
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
-License-File: LICENSE
 Requires-Dist: aiohttp<4.0,>=3.9
-Dynamic: license-file
 
-# VoidBale
+<div align="center">
 
-VoidBale is an asynchronous, token-only Python framework for building Bale Messenger bots.
+<img src="https://drive.google.com/uc?export=view&id=1rzTZVGNXCo5buCXsHXIe_roK_ghrqWq-" width="180" alt="VoidBale Logo">
 
-## Design
+### Async • Token-Only • Bale Bot Framework
 
-VoidBale exposes only the Bale Bot API model. It does not implement user authentication, user sessions, MTProto, phone login, QR login, account clients, or self-bot functionality.
+A modern asynchronous Python framework for building **Bale Messenger bots** with the Bale Bot API.
 
-## Minimal bot
+<p>
+  <a href="https://pypi.org/project/voidbale/">PyPI</a>
+  ·
+  <a href="https://weblics.ir/voidbale">Documentation</a>
+  ·
+  <a href="https://github.com/Sepehrkarimi1390/voidbale">GitHub</a>
+</p>
 
-```python
-from voidbale import Bot
+</div>
 
-bot = Bot("YOUR_BALE_BOT_TOKEN")
+---
 
-@bot.command("start")
-async def start(message):
-    await message.answer("Hello from VoidBale")
+## ✨ About
 
-bot.run()
-```
+**VoidBale** is a Python library for building Bale Messenger bots using the **Bale Bot API**.
 
-## Webhook
+It is designed with simplicity, performance, and an asynchronous architecture in mind, making it easier to build modern and scalable Bale bots with Python.
 
-```python
-from voidbale import Bot
-from voidbale.webhook import WebhookServer
+VoidBale focuses exclusively on **token-based bots** and provides a clean interface for working with the Bale Bot API.
 
-bot = Bot("YOUR_BALE_BOT_TOKEN")
+---
 
-@bot.command("start")
-async def start(message):
-    await message.answer("Webhook is working")
+## 🚀 Features
 
-bot.run_webhook("https://example.com/bale/webhook", host="0.0.0.0", port=8080, path="/bale/webhook")
-```
+* ⚡ Fully asynchronous
+* 🤖 Built for the Bale Bot API
+* 🔐 Token-only architecture
+* 🌐 Webhook support
+* 🎯 Powerful filtering system
+* ⌨️ Inline and Reply Keyboard support
+* 📦 Media support
+* 🔄 Retry and network error handling
+* ⏱️ Built-in scheduler
+* 🧩 Direct Bot API requests
+* 🛠️ Simple and extensible architecture
+* 🐍 Built with Python
 
-## Filters
+---
 
-```python
-from voidbale import Bot, F
+## 🔐 Token-Only Architecture
 
-bot = Bot("YOUR_BALE_BOT_TOKEN")
+VoidBale is entirely based on **Bot Tokens** and the **Bale Bot API**.
 
-@bot.message(F.text == "ping")
-async def ping(message):
-    await message.answer("pong")
+The library does not implement user-account functionality such as user authentication, phone login, QR login, user sessions, MTProto, or self-bot functionality.
 
-@bot.message(F.command("help"))
-async def help_command(message):
-    await message.answer("help")
-```
+Its purpose is simple:
 
-## Keyboards
+> **Build and run Bale bots using the official bot-oriented API model.**
 
-```python
-from voidbale import Bot, InlineKeyboard
+---
 
-bot = Bot("YOUR_BALE_BOT_TOKEN")
+## ⚡ Async First
 
-keyboard = InlineKeyboard().button("Open", url="https://bale.ai").button("Ping", callback_data="ping").adjust(2)
+VoidBale is designed from the ground up around Python's asynchronous programming model.
 
-@bot.command("start")
-async def start(message):
-    await message.answer("Choose", reply_markup=keyboard)
+This allows developers to take advantage of `asyncio` and build bots capable of handling multiple operations efficiently without blocking the main event loop.
 
-@bot.callback_query(F.data == "ping")
-async def callback(query):
-    await query.answer("pong")
-```
+---
 
-## API
+## 🌐 Webhook Ready
 
-The `Bot` object provides direct async wrappers for the common Bale Bot API operations and `bot.request()` for any Bot API method exposed by the configured Bale endpoint.
+VoidBale supports **Webhook-based bot updates**, making it suitable for applications that need to receive updates through an HTTP endpoint.
 
-The library accepts only a bot token and communicates through the Bale Bot API. No user-account client is included.
+This makes the framework suitable for both local development and server-side deployments.
+
+---
+
+## 🎯 Developer Friendly
+
+VoidBale aims to keep bot development straightforward while still providing the flexibility needed for larger projects.
+
+Its architecture brings together handlers, filters, keyboards, media operations, scheduling, webhooks, and direct Bot API requests in a consistent interface.
+
+---
+
+## 📦 Installation
+
+Install VoidBale directly from PyPI:
+
+```bash
+pip install voidbale

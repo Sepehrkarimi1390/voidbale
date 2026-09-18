@@ -1,4 +1,3 @@
-LICENSE
 README.md
 pyproject.toml
 voidbale/__init__.py
