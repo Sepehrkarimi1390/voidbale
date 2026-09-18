@@ -1,0 +1,19 @@
+[project]
+name = "voidbale"
+version = "1.0.0"
+description = "Async, token-only Python framework for building Bale Messenger bots."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "aiohttp>=3.9,<4.0"
+]
+keywords = ["bale", "bale-messenger", "bot", "bot-api", "webhook", "asyncio"]
+
+[project.urls]
+Homepage = "https://pypi.org/project/voidbale/"
+Documentation = "https://weblics.ir/voidbale"
+Github = "https://github.com/Sepehrkarimi1390/voidbale"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
