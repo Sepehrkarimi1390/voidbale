@@ -1,0 +1,112 @@
+Metadata-Version: 2.4
+Name: voidbale
+Version: 1.0.0
+Summary: Async, token-only Python framework for building Bale Messenger bots.
+Author-email: Amin Madani <aminmadani112@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2026 Amin Madani
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files, to deal in the Software
+        without restriction, including without limitation the rights to use, copy,
+        modify, merge, publish, distribute, sublicense, and sell copies of the Software,
+        and to permit persons to whom the Software is furnished to do so, subject to the
+        following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://pypi.org/project/voidbale/
+Project-URL: Documentation, https://weblics.ir/voidbale
+Keywords: bale,bale-messenger,bot,bot-api,webhook,asyncio
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: aiohttp<4.0,>=3.9
+Dynamic: license-file
+
+# VoidBale
+
+VoidBale is an asynchronous, token-only Python framework for building Bale Messenger bots.
+
+## Design
+
+VoidBale exposes only the Bale Bot API model. It does not implement user authentication, user sessions, MTProto, phone login, QR login, account clients, or self-bot functionality.
+
+## Minimal bot
+
+```python
+from voidbale import Bot
+
+bot = Bot("YOUR_BALE_BOT_TOKEN")
+
+@bot.command("start")
+async def start(message):
+    await message.answer("Hello from VoidBale")
+
+bot.run()
+```
+
+## Webhook
+
+```python
+from voidbale import Bot
+from voidbale.webhook import WebhookServer
+
+bot = Bot("YOUR_BALE_BOT_TOKEN")
+
+@bot.command("start")
+async def start(message):
+    await message.answer("Webhook is working")
+
+bot.run_webhook("https://example.com/bale/webhook", host="0.0.0.0", port=8080, path="/bale/webhook")
+```
+
+## Filters
+
+```python
+from voidbale import Bot, F
+
+bot = Bot("YOUR_BALE_BOT_TOKEN")
+
+@bot.message(F.text == "ping")
+async def ping(message):
+    await message.answer("pong")
+
+@bot.message(F.command("help"))
+async def help_command(message):
+    await message.answer("help")
+```
+
+## Keyboards
+
+```python
+from voidbale import Bot, InlineKeyboard
+
+bot = Bot("YOUR_BALE_BOT_TOKEN")
+
+keyboard = InlineKeyboard().button("Open", url="https://bale.ai").button("Ping", callback_data="ping").adjust(2)
+
+@bot.command("start")
+async def start(message):
+    await message.answer("Choose", reply_markup=keyboard)
+
+@bot.callback_query(F.data == "ping")
+async def callback(query):
+    await query.answer("pong")
+```
+
+## API
+
+The `Bot` object provides direct async wrappers for the common Bale Bot API operations and `bot.request()` for any Bot API method exposed by the configured Bale endpoint.
+
+The library accepts only a bot token and communicates through the Bale Bot API. No user-account client is included.
